@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.lingnan.mapper.RouteMapper">
+
+
+    <select id="findTotalCount" resultType="java.lang.Integer">
+
+        select count(*) from tab_route
+        <where>
+            <if test="rname !=null">
+                 rname like concat('%', #{rname}, '%')
+            </if>
+            <if test="cid !=0">
+                and cid =#{cid}
+            </if>
+        </where>
+    </select>
+
+<!--    //String sql = "select * from tab_route where cid = ? and rname like ?  limit ? , ?";-->
+    <select id="findByPage" resultType="edu.lingnan.pojo.Route">
+        select * from tab_route
+        <where>
+            <if test="cid !=0">
+                cid = #{cid}
+            </if>
+            <if test="rname !=null">
+                and rname like concat('%', #{rname}, '%')
+            </if>
+        </where>
+        limit  #{start} , #{pageSize}
+    </select>
+
+
+    <select id="findOne" resultType="edu.lingnan.pojo.Route">
+        select * from tab_route where rid = #{rid}
+    </select>
+</mapper>

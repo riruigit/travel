@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.lingnan.mapper.RegistUserMapper">
+    <update id="updateStatus">
+            update tab_user
+            set status = #{status}
+            where code = #{code}
+
+    </update>
+
+    <select id="ifExist" resultType="java.lang.Integer">
+        select count(uid)
+        from tab_user
+        where username = #{username}
+
+    </select>
+
+
+    <select id="selectByUserName" resultType="edu.lingnan.pojo.User" parameterType="string">
+        select *
+        from tab_user
+        where username = #{username}
+    </select>
+
+
+    <insert id="insertUser" parameterType="edu.lingnan.pojo.User">
+        insert into tab_user (uid, username, password, name, birthday, sex, telephone, email, status, code)
+        values (#{uid}, #{username}, #{password}, #{name}, #{birthday}, #{sex}, #{telephone}, #{email}, #{status},
+                #{code})
+    </insert>
+
+
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.lingnan.mapper.FavoriteMapper">
+
+
+    <insert id="add">
+        insert into tab_favorite
+        values (#{rid}, NOW(), #{uid})
+
+    </insert>
+    <delete id="deleteFavorite">
+        delete
+        from tab_favorite
+        where rid = #{rid}
+          and uid = #{uid}
+    </delete>
+
+
+    <select id="findByRidAndUid" resultType="edu.lingnan.pojo.Favorite">
+        select *
+        from tab_favorite
+        where rid = #{rid}
+          and uid = #{uid}
+    </select>
+
+
+    <select id="findCountByRid" resultType="java.lang.Integer">
+        select count(*)
+        from tab_favorite
+        where rid = #{rid}
+    </select>
+
+
+</mapper>
